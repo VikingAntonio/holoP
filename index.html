@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCG Card Foil Effects</title>
+    <link rel="stylesheet" href="docs/css/global.css">
+    <link rel="stylesheet" href="docs/css/cards.css">
+    <link rel="stylesheet" href="docs/css/cards/base.css">
+    <link rel="stylesheet" href="docs/css/cards/amazing-rare.css">
+    <link rel="stylesheet" href="docs/css/cards/cosmos-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/radiant-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/rainbow-alt.css">
+    <link rel="stylesheet" href="docs/css/cards/rainbow-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/regular-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/reverse-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/secret-rare.css">
+    <link rel="stylesheet" href="docs/css/cards/shiny-rare.css">
+    <link rel="stylesheet" href="docs/css/cards/shiny-v.css">
+    <link rel="stylesheet" href="docs/css/cards/shiny-vmax.css">
+    <link rel="stylesheet" href="docs/css/cards/swsh-pikachu.css">
+    <link rel="stylesheet" href="docs/css/cards/trainer-full-art.css">
+    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-holo.css">
+    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-secret-rare.css">
+    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-v-max.css">
+    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-v-regular.css">
+    <link rel="stylesheet" href="docs/css/cards/v-full-art.css">
+    <link rel="stylesheet" href="docs/css/cards/v-max.css">
+    <link rel="stylesheet" href="docs/css/cards/v-regular.css">
+    <link rel="stylesheet" href="docs/css/cards/v-star.css">
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #menu {
+            width: 300px;
+            background: #2a2a2a;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #444;
+            z-index: 100;
+        }
+
+        #menu h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            background: #333;
+            border: 1px solid #444;
+            color: #ddd;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: capitalize;
+        }
+
+        .menu-item:hover {
+            background: #444;
+        }
+
+        .menu-item.active {
+            background: #00bcd4;
+            color: #000;
+            border-color: #00acc1;
+        }
+
+        #content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .card-container {
+            width: 350px;
+            aspect-ratio: 0.718;
+        }
+
+        /* Override some base paths if necessary, assuming served from root */
+        :root {
+            --grain: url("docs/img/grain.webp");
+            --glitter: url("docs/img/glitter.png");
+        }
+
+        /* Ensure the card is visible and has some initial state */
+        .card {
+            --card-scale: 1;
+            --card-opacity: 0;
+            --pointer-x: 50%;
+            --pointer-y: 50%;
+            --rotate-x: 0deg;
+            --rotate-y: 0deg;
+        }
+
+        .card.active {
+            --card-opacity: 1;
+        }
+
+        .z-text {
+            position: absolute;
+            top: 20px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00bcd4;
+            pointer-events: none;
+        }
+
+        .card-name {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px black;
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu">
+        <h2 data-z>TCG Foils</h2>
+        <div id="rarity-list">
+            <button class="menu-item rarity-btn active" data-rarity="rare holo">Rare Holo</button>
+            <button class="menu-item rarity-btn" data-rarity="amazing rare">Amazing Rare</button>
+            <button class="menu-item rarity-btn" data-rarity="radiant rare">Radiant Rare</button>
+            <button class="menu-item rarity-btn" data-rarity="rare holo cosmos">Rare Holo Cosmos</button>
+            <button class="menu-item rarity-btn" data-rarity="rare holo v">Rare Holo V</button>
+            <button class="menu-item rarity-btn" data-rarity="rare holo vmax">Rare Holo VMAX</button>
+            <button class="menu-item rarity-btn" data-rarity="rare holo vstar">Rare Holo VSTAR</button>
+            <button class="menu-item rarity-btn" data-rarity="rare rainbow">Rare Rainbow</button>
+            <button class="menu-item rarity-btn" data-rarity="rare rainbow alt">Rare Rainbow Alt</button>
+            <button class="menu-item rarity-btn" data-rarity="rare secret">Rare Secret</button>
+            <button class="menu-item rarity-btn" data-rarity="rare shiny">Rare Shiny</button>
+            <button class="menu-item rarity-btn" data-rarity="rare shiny v">Rare Shiny V</button>
+            <button class="menu-item rarity-btn" data-rarity="rare shiny vmax">Rare Shiny VMAX</button>
+            <button class="menu-item rarity-btn" data-rarity="rare ultra">Rare Ultra</button>
+            <button class="menu-item rarity-btn" data-rarity="trainer gallery rare holo">Trainer Gallery</button>
+            <button class="menu-item rarity-btn" data-rarity="rare holo reverse">Reverse Holo</button>
+        </div>
+        <hr>
+        <h2>Subtypes</h2>
+        <div id="subtype-list">
+            <button class="menu-item subtype-btn" data-subtype="">None</button>
+            <button class="menu-item subtype-btn" data-subtype="stage">Stage</button>
+            <button class="menu-item subtype-btn" data-subtype="supporter">Supporter</button>
+            <button class="menu-item subtype-btn" data-subtype="item">Item</button>
+            <button class="menu-item subtype-btn" data-subtype="v-union">V-Union</button>
+        </div>
+    </div>
+
+    <div id="content">
+        <h1 class="z-text" data-z>TCG PREVIEW</h1>
+        <div class="card-container">
+            <div class="card interactive active" data-rarity="rare holo" data-subtypes="">
+                <div class="card__translater">
+                    <button class="card__rotator">
+                        <img class="card__back" src="https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.png" alt="Card Back">
+                        <div class="card__front">
+                            <!-- Using a placeholder for front image -->
+                            <img src="docs/img/vmaxbg.jpg" alt="Card Front">
+                            <div class="card-name" data-z>PIKACHU VMAX</div>
+                            <div class="card__shine"></div>
+                            <div class="card__glare"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ztext.js integration -->
+    <script src="/path/to/ztext.min.js"></script>
+    <!-- Fallback CDN for ztext -->
+    <script src="https://cdn.jsdelivr.net/npm/ztext.js@0.1.3/dist/ztext.min.js"></script>
+
+    <script>
+        const card = document.querySelector('.card');
+        const container = document.querySelector('.card-container');
+
+        const updateStyles = (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const px = (x / rect.width) * 100;
+            const py = (y / rect.height) * 100;
+
+            const fromLeft = x / rect.width;
+            const fromTop = y / rect.height;
+            const fromCenter = Math.sqrt(Math.pow(0.5 - fromLeft, 2) + Math.pow(0.5 - fromTop, 2)) * 2;
+
+            const rotateX = (fromLeft - 0.5) * 40; // max 20deg
+            const rotateY = (fromTop - 0.5) * -40; // max 20deg
+
+            card.style.setProperty('--pointer-x', `${px}%`);
+            card.style.setProperty('--pointer-y', `${py}%`);
+            card.style.setProperty('--pointer-from-left', fromLeft);
+            card.style.setProperty('--pointer-from-top', fromTop);
+            card.style.setProperty('--pointer-from-center', fromCenter);
+
+            card.style.setProperty('--background-x', `${px}%`);
+            card.style.setProperty('--background-y', `${py}%`);
+
+            card.style.setProperty('--rotate-x', `${rotateX}deg`);
+            card.style.setProperty('--rotate-y', `${rotateY}deg`);
+
+            card.style.setProperty('--card-opacity', 1);
+            card.style.setProperty('--card-scale', 1.1);
+        };
+
+        const resetStyles = () => {
+            card.style.setProperty('--card-opacity', 0);
+            card.style.setProperty('--card-scale', 1);
+            card.style.setProperty('--rotate-x', '0deg');
+            card.style.setProperty('--rotate-y', '0deg');
+        };
+
+        window.addEventListener('pointermove', (e) => {
+            // Check if pointer is over the card or near it
+            const rect = container.getBoundingClientRect();
+            const padding = 100;
+            if (e.clientX >= rect.left - padding && e.clientX <= rect.right + padding &&
+                e.clientY >= rect.top - padding && e.clientY <= rect.bottom + padding) {
+                updateStyles(e);
+            } else {
+                resetStyles();
+            }
+        });
+
+        // Menu logic
+        const rarityBtns = document.querySelectorAll('.rarity-btn');
+        const subtypeBtns = document.querySelectorAll('.subtype-btn');
+
+        rarityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                rarityBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                card.setAttribute('data-rarity', btn.getAttribute('data-rarity'));
+            });
+        });
+
+        subtypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                subtypeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                card.setAttribute('data-subtypes', btn.getAttribute('data-subtype'));
+            });
+        });
+
+        // Initialize ztext
+        window.addEventListener('load', () => {
+            if (typeof Ztextify !== 'undefined') {
+                new Ztextify("[data-z]", {
+                    depth: "10px",
+                    layers: 10,
+                    perspective: "500px",
+                    fade: true,
+                    direction: "both",
+                    event: "pointer",
+                    eventRotation: "15deg"
+                });
+            }
+        });
+    </script>
+</body>
+</html>
