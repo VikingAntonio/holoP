@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCG Card Foil Effects</title>
-    <link rel="stylesheet" href="docs/css/global.css">
-    <link rel="stylesheet" href="docs/css/cards.css">
-    <link rel="stylesheet" href="docs/css/cards/base.css">
-    <link rel="stylesheet" href="docs/css/cards/amazing-rare.css">
-    <link rel="stylesheet" href="docs/css/cards/cosmos-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/radiant-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/rainbow-alt.css">
-    <link rel="stylesheet" href="docs/css/cards/rainbow-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/regular-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/reverse-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/secret-rare.css">
-    <link rel="stylesheet" href="docs/css/cards/shiny-rare.css">
-    <link rel="stylesheet" href="docs/css/cards/shiny-v.css">
-    <link rel="stylesheet" href="docs/css/cards/shiny-vmax.css">
-    <link rel="stylesheet" href="docs/css/cards/swsh-pikachu.css">
-    <link rel="stylesheet" href="docs/css/cards/trainer-full-art.css">
-    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-holo.css">
-    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-secret-rare.css">
-    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-v-max.css">
-    <link rel="stylesheet" href="docs/css/cards/trainer-gallery-v-regular.css">
-    <link rel="stylesheet" href="docs/css/cards/v-full-art.css">
-    <link rel="stylesheet" href="docs/css/cards/v-max.css">
-    <link rel="stylesheet" href="docs/css/cards/v-regular.css">
-    <link rel="stylesheet" href="docs/css/cards/v-star.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/cards/base.css">
+    <link rel="stylesheet" href="css/cards/amazing-rare.css">
+    <link rel="stylesheet" href="css/cards/cosmos-holo.css">
+    <link rel="stylesheet" href="css/cards/radiant-holo.css">
+    <link rel="stylesheet" href="css/cards/rainbow-alt.css">
+    <link rel="stylesheet" href="css/cards/rainbow-holo.css">
+    <link rel="stylesheet" href="css/cards/regular-holo.css">
+    <link rel="stylesheet" href="css/cards/reverse-holo.css">
+    <link rel="stylesheet" href="css/cards/secret-rare.css">
+    <link rel="stylesheet" href="css/cards/shiny-rare.css">
+    <link rel="stylesheet" href="css/cards/shiny-v.css">
+    <link rel="stylesheet" href="css/cards/shiny-vmax.css">
+    <link rel="stylesheet" href="css/cards/swsh-pikachu.css">
+    <link rel="stylesheet" href="css/cards/trainer-full-art.css">
+    <link rel="stylesheet" href="css/cards/trainer-gallery-holo.css">
+    <link rel="stylesheet" href="css/cards/trainer-gallery-secret-rare.css">
+    <link rel="stylesheet" href="css/cards/trainer-gallery-v-max.css">
+    <link rel="stylesheet" href="css/cards/trainer-gallery-v-regular.css">
+    <link rel="stylesheet" href="css/cards/v-full-art.css">
+    <link rel="stylesheet" href="css/cards/v-max.css">
+    <link rel="stylesheet" href="css/cards/v-regular.css">
+    <link rel="stylesheet" href="css/cards/v-star.css">
     <style>
         body {
             display: flex;
@@ -93,10 +93,10 @@
             aspect-ratio: 0.718;
         }
 
-        /* Override some base paths if necessary, assuming served from root */
+        /* Override some base paths if necessary, assuming served from docs/ */
         :root {
-            --grain: url("docs/img/grain.webp");
-            --glitter: url("docs/img/glitter.png");
+            --grain: url("img/grain.webp");
+            --glitter: url("img/glitter.png");
         }
 
         /* Ensure the card is visible and has some initial state */
@@ -171,13 +171,13 @@
     <div id="content">
         <h1 class="z-text" data-z>TCG PREVIEW</h1>
         <div class="card-container">
-            <div class="card interactive active" data-rarity="rare holo" data-subtypes="">
+            <div class="card interactive active" data-rarity="rare holo" data-subtypes="" data-supertype="pokémon">
                 <div class="card__translater">
                     <button class="card__rotator">
                         <img class="card__back" src="https://tcgplayer-cdn.tcgplayer.com/product/648663_in_1000x1000.jpg" alt="Card Back">
                         <div class="card__front">
                             <!-- Using a placeholder for front image -->
-                            <img src="docs/img/vmaxbg.jpg" alt="Card Front">
+                            <img src="img/vmaxbg.jpg" alt="Card Front">
                             <div class="card-name" data-z>PIKACHU VMAX</div>
                             <div class="card__shine"></div>
                             <div class="card__glare"></div>
@@ -189,9 +189,7 @@
     </div>
 
     <!-- ztext.js integration -->
-    <script src="/path/to/ztext.min.js"></script>
-    <!-- Fallback CDN for ztext -->
-    <script src="https://cdn.jsdelivr.net/npm/ztext.js@0.1.3/dist/ztext.min.js"></script>
+    <script src="js/ztext.min.js"></script>
 
     <script>
         const card = document.querySelector('.card');
